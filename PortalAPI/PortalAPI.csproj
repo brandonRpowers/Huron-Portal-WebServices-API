@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <PackageId>PortalAPI</PackageId>
+    <PackageId>BrandonPowers.PortalAPI</PackageId>
     <Version>1.0.0</Version>
     <Authors>Brandon Powers</Authors>
     <Description>Client library for the application API</Description>
