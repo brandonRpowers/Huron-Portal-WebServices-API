@@ -37,9 +37,6 @@ jobs:
       - name: Pack
         run: dotnet pack ./PortalAPI/PortalAPI.csproj -c Release --no-build -o ./nupkg
 
-      - name: Push to GitHub Packages
-        run: dotnet nuget push "./nupkg/*.nupkg" --source "https://nuget.pkg.github.com/brandonRpowers/index.json" --skip-duplicate
-
       - name: Push to NuGet.org
         run: dotnet nuget push "./nupkg/*.nupkg" \
               --source "https://api.nuget.org/v3/index.json" \
