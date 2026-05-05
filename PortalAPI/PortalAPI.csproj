@@ -2,11 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <PackageId>BrandonPowers.PortalAPI</PackageId>
+    <PackageId>PortalAPI</PackageId>
     <Version>1.0.0</Version>
     <Authors>Brandon Powers</Authors>
     <Description>Client library for the application API</Description>
-    <RepositoryUrl>https://https://github.com/brandonRpowers/Huron-Portal-WebServices-API</RepositoryUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/brandonRpowers/Huron-Portal-WebServices-API</RepositoryUrl>
   </PropertyGroup>
 </Project>
