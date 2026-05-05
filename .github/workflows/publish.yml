@@ -26,13 +26,13 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Restore
-        run: dotnet restore ./PortalAPI.csproj
+        run: dotnet restore ./PortalAPI/PortalAPI.csproj
 
       - name: Build
-        run: dotnet build ./PortalAPI.csproj -c Release --no-restore
+        run: dotnet build ./PortalAPI/PortalAPI.csproj -c Release --no-restore
 
       - name: Pack
-        run: dotnet pack ./PortalAPI.csproj -c Release --no-build -o ./nupkg
+        run: dotnet pack ./PortalAPI/PortalAPI.csproj -c Release --no-build -o ./nupkg
 
       - name: Push to GitHub Packages
         run: dotnet nuget push "./nupkg/*.nupkg" --source "https://nuget.pkg.github.com/brandonRpowers/index.json" --skip-duplicate
