@@ -1,31 +1,43 @@
 name: Publish NuGet package
 
 on:
+  workflow_dispatch:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       packages: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-dotnet@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
           source-url: https://nuget.pkg.github.com/brandonRpowers/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Restore
+        run: dotnet restore
+
       - name: Build
-        run: dotnet build -c Release
+        run: dotnet build -c Release --no-restore
 
       - name: Pack
-        run: dotnet pack -c Release --no-build
+        run: dotnet pack -c Release --no-build -o ./nupkg
 
-      - name: Push
-        run: dotnet nuget push "**/bin/Release/*.nupkg" --source "https://nuget.pkg.github.com/brandonRpowers/index.json" --skip-duplicate
+      - name: List package files (debug)
+        run: ls -R ./nupkg
+
+      - name: Push to GitHub Packages
+        run: dotnet nuget push "./nupkg/*.nupkg" \
+              --source "https://nuget.pkg.github.com/brandonRpowers/index.json" \
+              --skip-duplicate
