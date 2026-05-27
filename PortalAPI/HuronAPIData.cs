@@ -23,7 +23,6 @@ namespace PortalAPI
 
         public List<HuronAPISetElementData> GetSetAttributes(string name)
         {
-            var str = "";
             var attribute = Attributes?.Where(m => m.Caption == name).FirstOrDefault();
             if (attribute != null)
             {
