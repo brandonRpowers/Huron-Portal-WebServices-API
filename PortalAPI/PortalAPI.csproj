@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
     <PackageId>BrandonPowers.PortalAPI</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Authors>Brandon Powers</Authors>
     <Description>Client library for the application API</Description>
     <RepositoryUrl>https://github.com/brandonRpowers/Huron-Portal-WebServices-API</RepositoryUrl>
