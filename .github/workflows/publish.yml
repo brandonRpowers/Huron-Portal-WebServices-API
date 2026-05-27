@@ -15,29 +15,27 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 9.0.x
           source-url: https://nuget.pkg.github.com/brandonRpowers/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Show repo structure
+        run: ls -R    
+
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore ./PortalAPI/PortalAPI.csproj
 
       - name: Build
-        run: dotnet build -c Release --no-restore
+        run: dotnet build ./PortalAPI/PortalAPI.csproj -c Release --no-restore
 
       - name: Pack
-        run: dotnet pack -c Release --no-build -o ./nupkg
+        run: dotnet pack ./PortalAPI/PortalAPI.csproj -c Release --no-build -o ./nupkg
 
-      - name: List package files (debug)
-        run: ls -R ./nupkg
-
-      - name: Push to GitHub Packages
-        run: dotnet nuget push "./nupkg/*.nupkg" \
-              --source "https://nuget.pkg.github.com/brandonRpowers/index.json" \
-              --skip-duplicate
+      - name: Push to NuGet.org
+        run: dotnet nuget push "./nupkg/*.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate  
